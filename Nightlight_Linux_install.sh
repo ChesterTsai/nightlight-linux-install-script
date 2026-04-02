@@ -83,8 +83,11 @@ installWebKit() {
         pacman)
             "$ESCALATION_TOOL" "$PACKAGER" -S webkit2gtk-4.1
             ;;
-        dnf|rpm-ostree)
+        dnf)
             "$ESCALATION_TOOL" "$PACKAGER" install webkit2gtk4.1
+            ;;
+        rpm-ostree)
+            "$PACKAGER" install webkit2gtk4.1
             ;;
         apt-get|zypper)
             "$ESCALATION_TOOL" "$PACKAGER" install webkit2gtk-4.1
