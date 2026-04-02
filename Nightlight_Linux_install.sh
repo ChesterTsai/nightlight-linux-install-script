@@ -48,13 +48,16 @@ checkPackageManager() {
     fi
 }
 
-checkWebKit() {
+installWebKit() {
     case "$PACKAGER" in
-        pacman|apt-get|zypper)
-            webKit="webkit2gtk-4.1"
+        pacman)
+            "$ESCALATION_TOOL" "$PACKAGER" -S webkit2gtk-4.1
             ;;
         dnf|rpm-ostree)
-            webKit="webkit2gtk4.1"
+            "$ESCALATION_TOOL" "$PACKAGER" install webkit2gtk4.1
+            ;;
+        apt-get|zypper)
+            "$ESCALATION_TOOL" "$PACKAGER" install webkit2gtk-4.1
             ;;
         *)
             printf "%b\n" "Unsupported package manager"
@@ -66,9 +69,7 @@ installNightlight() {
 
     checkEscalationTool
     checkPackageManager
-    checkWebKit
-
-    "$ESCALATION_TOOL" "$PACKAGER" install "$webKit"
+    installWebKit
 
     wget http://update.nightlight.gg/desktop/latest/linux -O nightlight-linux
     chmod +x nightlight-linux
