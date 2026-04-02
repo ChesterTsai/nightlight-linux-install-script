@@ -8,13 +8,40 @@ command_exists() {
     return 0
 }
 
+
+## TODO: make support for steamOS
+checkSteamOS() {
+    if [[ -f "/etc/os-release" ]]; then
+        distro=$(source /etc/os-release && echo $NAME)
+    else
+        distro="*Unknown*"
+    fi
+
+
+    ## not sure what steamOS wrote on /etc/os-release, this is just a temperary name
+    if [[ $"distro" != "steamOS" ]]
+        return 0
+    fi
+
+    printf "%b\n" "Set a password for your deck, you'll need it later"
+    passwd
+
+    printf "%b\n" "Disabling readonly mode"
+    sudo steamos-readonly disable
+
+    printf "%b\n" "Setting up PGP keys"
+    sudo pacman-key --init
+    sudo pacman-key --populate archlinux
+    sudo pacman-key --populate holo
+
+}
+
 checkEscalationTool() {
     ## Check for escalation tools.
     if [ -z "$ESCALATION_TOOL_CHECKED" ]; then
         if [ "$(id -u)" = "0" ]; then
             ESCALATION_TOOL="eval"
             ESCALATION_TOOL_CHECKED=true
-            printf "%b\n" "${CYAN}Running as root, no escalation needed${RC}"
             return 0
         fi
 
@@ -49,6 +76,9 @@ checkPackageManager() {
 }
 
 installWebKit() {
+
+    printf "%b\n" "Installing necessary dependency"
+
     case "$PACKAGER" in
         pacman)
             "$ESCALATION_TOOL" "$PACKAGER" -S webkit2gtk-4.1
@@ -67,6 +97,7 @@ installWebKit() {
 
 installNightlight() {
 
+    #checkSteamOS
     checkEscalationTool
     checkPackageManager
     installWebKit
@@ -81,5 +112,3 @@ installNightlight() {
 }
 
 installNightlight
-
-
