@@ -19,7 +19,7 @@ by default, it should be in ~/Downloads/, so
 
 then
 
-	./Nightlight_Linux_install.sh
+	chmod +x Nightlight_Linux_install && ./Nightlight_Linux_install.sh
 
 ### TODO
 this script currently does NOT support steamOS, since I don't have a steam deck and I have no idea how to check if a user is using steamOS<br>
