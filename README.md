@@ -8,8 +8,7 @@ This script draws heavily on the work of ChrisTitus's [linutil](https://github.c
 
 ### How to run this script
 After reading what it does,<br>
-Click into "Nightlight_Linux_install.sh", and click "Download raw file" on the top right corner<br>
-Then open up your terminal, type
+Open up your terminal, type
 
 	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/nightlight-linux-install-script/refs/heads/main/Nightlight_Linux_install.sh | bash
 
