@@ -13,8 +13,25 @@ command_exists() {
 }
 
 checkSteamOS() {
-    #TODO: add support for steamOS
-    return 0
+    if ! command_exists steamos-readonly; then
+        return 0
+    fi
+
+    if [ "${steamos-readonly}" = "disable" ]; then
+        return 0
+    fi
+
+    printf "%b\n" "${YELLOW}Set a password for your deck, you'll need it later${RC}"
+    passwd
+
+    printf "%b\n" "${YELLOW}Disabling readonly mode${RC}"
+    sudo steamos-readonly disable
+
+    printf "%b\n" "${YELLOW}Setting up PGP keys${RC}"
+    sudo pacman-key --init
+    sudo pacman-key --populate archlinux
+    sudo pacman-key --populate holo
+
 }
 
 checkEscalationTool() {
