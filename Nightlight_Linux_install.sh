@@ -1,5 +1,9 @@
 #!/bin/bash
 
+RC='\033[0m'
+RED='\033[31m'
+YELLOW='\033[33m'
+
 command_exists() {
     for cmd in "$@"; do
         export PATH="$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$PATH"
@@ -8,18 +12,12 @@ command_exists() {
     return 0
 }
 
-
-## TODO: make support for steamOS
 checkSteamOS() {
-    if [[ -f "/etc/os-release" ]]; then
-        distro=$(source /etc/os-release && echo $NAME)
-    else
-        distro="*Unknown*"
+    if ! command_exists steamos-readonly; then
+        return 0
     fi
 
-
-    ## not sure what steamOS wrote on /etc/os-release, this is just a temperary name
-    if [[ $"distro" != "steamOS" ]]
+    if [ "${steamos-readonly}" = "disable" ]; then
         return 0
     fi
 
@@ -77,7 +75,7 @@ checkPackageManager() {
 
 installWebKit() {
 
-    printf "%b\n" "Installing necessary dependency"
+    printf "%b\n" "${YELLOW}Installing necessary dependency${RC}"
 
     case "$PACKAGER" in
         pacman)
@@ -93,7 +91,7 @@ installWebKit() {
             "$ESCALATION_TOOL" "$PACKAGER" install webkit2gtk-4.1
             ;;
         *)
-            printf "%b\n" "Unsupported package manager"
+            printf "%b\n" "${RED}Unsupported package manager${RC}"
             ;;
     esac
 }
@@ -109,9 +107,8 @@ installNightlight() {
     chmod +x nightlight-linux
 
     printf "\n\n\n\n\n"
-    printf "%b\n" "Download Completed!"
-    printf "%b\n" "Double Click nightlight-linux in the ${PWD} directory in your file manager to open nightlight"
-
+    printf "%b\n" "${YELLOW}Download Completed!${RC}"
+    printf "%b\n" "${YELLOW}Double Click nightlight-linux in the ${PWD} directory in your file manager to open nightlight${RC}"
 }
 
 installNightlight
