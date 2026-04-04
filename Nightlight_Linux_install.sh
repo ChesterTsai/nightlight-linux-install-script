@@ -56,21 +56,25 @@ checkPackageManager() {
     fi
 }
 
-installWebKit() {
+installDependency() {
 
     printf "%b\n" "${YELLOW}Installing necessary dependency${RC}"
 
     case "$PACKAGER" in
         pacman)
+            "$ESCALATION_TOOL" "$PACKAGER" -S wget
             "$ESCALATION_TOOL" "$PACKAGER" -S webkit2gtk-4.1
             ;;
         dnf)
+            "$ESCALATION_TOOL" "$PACKAGER" install wget2-wget
             "$ESCALATION_TOOL" "$PACKAGER" install webkit2gtk4.1
             ;;
         rpm-ostree)
+            "$PACKAGER" install wget2-wget
             "$PACKAGER" install webkit2gtk4.1
             ;;
         apt-get|zypper)
+            "$ESCALATION_TOOL" "$PACKAGER" install wget
             "$ESCALATION_TOOL" "$PACKAGER" install webkit2gtk-4.1
             ;;
         *)
@@ -84,7 +88,7 @@ installNightlight() {
     #checkSteamOS
     checkEscalationTool
     checkPackageManager
-    installWebKit
+    installDependency
 
     wget http://update.nightlight.gg/desktop/latest/linux -O nightlight-linux
     chmod +x nightlight-linux
