@@ -12,7 +12,7 @@ Open up your terminal, type
 
 	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/nightlight-linux-install-script/refs/heads/main/Nightlight_Linux_install.sh | bash
 
-or try out dev branch
+or try out dev branch (not recommended)
 
 	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/nightlight-linux-install-script/refs/heads/dev/Nightlight_Linux_install.sh | bash
 
