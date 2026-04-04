@@ -98,7 +98,7 @@ installWebKit() {
 
 installNightlight() {
 
-    #checkSteamOS
+    checkSteamOS
     checkEscalationTool
     checkPackageManager
     installWebKit
