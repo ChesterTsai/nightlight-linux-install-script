@@ -45,6 +45,7 @@ Ubuntu<br>
 Linux Mint<br>
 Zorin OS<br>
 Pop!_OS<br>
+
 <br>
 etc.
 </details>
@@ -54,6 +55,13 @@ Fedora Atomic<br>
 Fedora Silver Blue<br>
 Fedora Kinoite<br>
 Bazzite<br>
+<br>
+etc.
+</details>
+<details>
+ <summary>openSUSE / SUSE Based Distro</summary>
+openSUSE Leap<br>
+openSUSE Tumbleweed<br>
 <br>
 etc.
 </details>
