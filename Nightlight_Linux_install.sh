@@ -14,7 +14,7 @@ command_exists() {
 
 checkPassword() {
 
-    if [[ $(passwd -S ${USER} | awk '{print $2}') = P ]]; then
+    if [ "$(passwd -S ${USER} | awk '{print $2}')" = "P" ]; then
         return 0
     fi
 
@@ -51,7 +51,7 @@ checkSteamOS() {
         return 0
     fi
 
-    if [[ $("$ESCALATION_TOOL" steamos-readonly status) = enabled ]]; then
+    if [ "$("$ESCALATION_TOOL" steamos-readonly status)" = "enabled" ]; then
         printf "%b\n" "${YELLOW}Disabling readonly mode${RC}"
         "$ESCALATION_TOOL" steamos-readonly disable
     fi
@@ -109,6 +109,10 @@ installNightlight() {
     checkSteamOS
     checkPackageManager
     installDependency
+
+    if [ -e nightlight-linux ]; then
+        "$ESCALATION_TOOL" rm nightlight-linux
+    fi
 
     wget http://update.nightlight.gg/desktop/latest/linux -O nightlight-linux
     chmod +x nightlight-linux
