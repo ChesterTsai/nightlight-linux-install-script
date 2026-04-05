@@ -12,17 +12,6 @@ command_exists() {
     return 0
 }
 
-checkPassword() {
-
-    if [ "$(passwd -S ${USER} | awk '{print $2}')" = "P" ]; then
-        return 0
-    fi
-
-    printf "%b\n" "${YELLOW}Set a password for ${USER}, you'll need it later${RC}"
-    passwd
-
-}
-
 checkEscalationTool() {
     ## Check for escalation tools.
     if [ -z "$ESCALATION_TOOL_CHECKED" ]; then
@@ -44,6 +33,17 @@ checkEscalationTool() {
         printf "%b\n" "${RED}Can't find a supported escalation tool${RC}"
         exit 1
     fi
+}
+
+checkPassword() {
+
+    if [ "$(passwd -S ${USER} | awk '{print $2}')" = "P" ]; then
+        return 0
+    fi
+
+    printf "${YELLOW}Set a password for ${USER}, you'll need it later${RC}\n"
+    "$ESCALATION_TOOL" passwd ${USER}
+
 }
 
 checkSteamOS() {
@@ -104,8 +104,8 @@ installDependency() {
 
 installNightlight() {
 
-    checkPassword
     checkEscalationTool
+    checkPassword
     checkSteamOS
     checkPackageManager
     installDependency
