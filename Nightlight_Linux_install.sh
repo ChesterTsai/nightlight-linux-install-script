@@ -37,12 +37,11 @@ checkEscalationTool() {
 
 checkPassword() {
 
-    if [ "$(passwd -S ${USER} | awk '{print $2}')" = "P" ]; then
-        return 0
-    fi
-
-    printf "${YELLOW}Set a password for ${USER}, you'll need it later${RC}\n"
-    "$ESCALATION_TOOL" passwd ${USER}
+    while [ "$(passwd -S ${USER} | awk '{print $2}')" = "NP" ]
+    do
+        printf "${YELLOW}Set a password for ${USER}, you'll need it later${RC}\n"
+        "$ESCALATION_TOOL" passwd ${USER}
+    done
 
 }
 
