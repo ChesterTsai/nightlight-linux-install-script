@@ -110,7 +110,11 @@ installNightlight() {
     installDependency
 
     if [ -e nightlight-linux ]; then
-        "$ESCALATION_TOOL" rm nightlight-linux
+        printf "%b\n" "${RED}ERROR!${RC}"
+        printf "%b\n" "${RED}There's a file/directory named [nightlight-linux] in ${PWD},${RC}"
+        printf "%b\n" "${RED}Please rename it or remove it and run the script again${RC}"
+        printf "%b\n" "${RED}as it will conflict with the downloaded file.${RC}"
+        return 0
     fi
 
     wget http://update.nightlight.gg/desktop/latest/linux -O nightlight-linux
