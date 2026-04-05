@@ -12,25 +12,16 @@ command_exists() {
     return 0
 }
 
-checkSteamOS() {
-    if ! command_exists steamos-readonly; then
+checkPassword() {
+
+    passwdField=$(cat /etc/shadow | grep "${USER}" | cut -d ':' -f 2)
+
+    if [[ "${passwdField}x" != "x" && "$passwdField" != '!' ]]; then
         return 0
     fi
 
-    if [ "${steamos-readonly}" = "disable" ]; then
-        return 0
-    fi
-
-    printf "%b\n" "${YELLOW}Set a password for your deck, you'll need it later${RC}"
+    printf "%b\n" "${YELLOW}Set a password for ${USER}, you'll need it later${RC}"
     passwd
-
-    printf "%b\n" "${YELLOW}Disabling readonly mode${RC}"
-    sudo steamos-readonly disable
-
-    printf "%b\n" "${YELLOW}Setting up PGP keys${RC}"
-    sudo pacman-key --init
-    sudo pacman-key --populate archlinux
-    sudo pacman-key --populate holo
 
 }
 
@@ -55,6 +46,23 @@ checkEscalationTool() {
         printf "%b\n" "${RED}Can't find a supported escalation tool${RC}"
         exit 1
     fi
+}
+
+checkSteamOS() {
+    if ! command_exists steamos-readonly; then
+        return 0
+    fi
+
+    if [[ $("$ESCALATION_TOOL" steamos-readonly status) == "enabled" ]]; then
+        printf "%b\n" "${YELLOW}Disabling readonly mode${RC}"
+        "$ESCALATION_TOOL" steamos-readonly disable
+    fi
+
+    printf "%b\n" "${YELLOW}Setting up PGP keys${RC}"
+    "$ESCALATION_TOOL" pacman-key --init
+    "$ESCALATION_TOOL" pacman-key --populate archlinux
+    "$ESCALATION_TOOL" pacman-key --populate holo
+
 }
 
 checkPackageManager() {
@@ -98,8 +106,9 @@ installDependency() {
 
 installNightlight() {
 
-    checkSteamOS
+    checkPassword
     checkEscalationTool
+    checkSteamOS
     checkPackageManager
     installDependency
 
