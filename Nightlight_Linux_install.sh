@@ -14,9 +14,7 @@ command_exists() {
 
 checkPassword() {
 
-    passwdField=$(cat /etc/shadow | grep "${USER}" | cut -d ':' -f 2)
-
-    if [[ "${passwdField}x" != "x" && "$passwdField" != '!' ]]; then
+    if [[ $(passwd -S ${USER} | awk '{print $2}') = NP ]]; then
         return 0
     fi
 
@@ -53,7 +51,7 @@ checkSteamOS() {
         return 0
     fi
 
-    if [[ $("$ESCALATION_TOOL" steamos-readonly status) == "enabled" ]]; then
+    if [[ $("$ESCALATION_TOOL" steamos-readonly status) = enabled ]]; then
         printf "%b\n" "${YELLOW}Disabling readonly mode${RC}"
         "$ESCALATION_TOOL" steamos-readonly disable
     fi
