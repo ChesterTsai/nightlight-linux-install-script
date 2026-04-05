@@ -14,7 +14,7 @@ command_exists() {
 
 checkPassword() {
 
-    if [[ $(passwd -S ${USER} | awk '{print $2}') = NP ]]; then
+    if [[ $(passwd -S ${USER} | awk '{print $2}') = P ]]; then
         return 0
     fi
 
