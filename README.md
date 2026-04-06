@@ -22,46 +22,50 @@ or try out dev branch (not recommended)
 ### Supported distros
 <details>
  <summary>Arch / Arch Based Distros</summary>
-Arch Linux<br>
-CachyOS<br>
-EndeavourOS<br>
-Manjaro<br>
-<br>
-etc.<br>
-<br>
-steamOS support is in the dev branch
+
+- Arch Linux
+- CachyOS
+- EndeavourOS
+- Manjaro
+
+etc.
+
+- steamOS support is in the dev branch
 </details>
 <details>
  <summary>Fedora / Fedora Based Distros</summary>
-Fedora<br>
-Nobara<br>
-<br>
+
+- Fedora
+- Nobara
+
 etc.
 </details>
 <details>
  <summary>Debian / Debian Based Distros</summary>
-Debian<br>
-Ubuntu<br>
-Linux Mint<br>
-Zorin OS<br>
-Pop!_OS<br>
 
-<br>
+- Debian
+- Ubuntu
+- Linux Mint
+- Zorin OS
+- Pop!_OS
+
 etc.
 </details>
 <details>
  <summary>Fedora Atomic / Fedora Atomic Based Distros</summary>
-Fedora Atomic<br>
-Fedora Silver Blue<br>
-Fedora Kinoite<br>
-Bazzite<br>
-<br>
+
+- Fedora Atomi
+- Fedora Silver Blue
+- Fedora Kinoite
+- Bazzite
+
 etc.
 </details>
 <details>
  <summary>openSUSE / SUSE Based Distro</summary>
-openSUSE Leap<br>
-openSUSE Tumbleweed<br>
-<br>
+
+- openSUSE Leap
+- openSUSE Tumbleweed
+
 etc.
 </details>
