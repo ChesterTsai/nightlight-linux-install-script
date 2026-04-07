@@ -27,10 +27,9 @@ or try out dev branch (not recommended)
 - CachyOS
 - EndeavourOS
 - Manjaro
+- steamOS
 
 etc.
-
-- steamOS support is in the dev branch
 </details>
 <details>
  <summary>Fedora / Fedora Based Distros</summary>
