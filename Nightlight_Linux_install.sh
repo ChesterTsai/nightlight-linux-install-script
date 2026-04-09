@@ -50,7 +50,7 @@ checkSteamOS() {
         return 0
     fi
 
-    if [ "$(${$ESCALATION_TOOL} steamos-readonly status)" = "enabled" ]; then
+    if [ "$(${ESCALATION_TOOL} steamos-readonly status)" = "enabled" ]; then
         printf "%b\n" "${YELLOW}Disabling readonly mode${RC}"
         "$ESCALATION_TOOL" steamos-readonly disable
     fi
