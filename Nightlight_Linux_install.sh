@@ -50,15 +50,15 @@ checkSteamOS() {
         return 0
     fi
 
-    if [ "$(sudo steamos-readonly status)" = "enabled" ]; then
+    if [ "$($ESCALATION_TOOL steamos-readonly status)" = "enabled" ]; then
         printf "%b\n" "${YELLOW}Disabling readonly mode${RC}"
-        sudo steamos-readonly disable
+        "$ESCALATION_TOOL" steamos-readonly disable
     fi
 
     printf "%b\n" "${YELLOW}Setting up PGP keys${RC}"
-    sudo pacman-key --init
-    sudo pacman-key --populate archlinux
-    sudo pacman-key --populate holo
+    "$ESCALATION_TOOL" pacman-key --init
+    "$ESCALATION_TOOL" pacman-key --populate archlinux
+    "$ESCALATION_TOOL" pacman-key --populate holo
 
 }
 
