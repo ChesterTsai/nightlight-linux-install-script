@@ -39,7 +39,7 @@ checkPassword() {
 
     while [ "$(passwd -S ${USER} | awk '{print $2}')" = "NP" ]
     do
-        printf "${YELLOW}Set a password for ${USER}, you'll need it later${RC}\n"
+        printf "%b" "${YELLOW}Set a password for ${USER}, you'll need it later${RC}\n"
         "$ESCALATION_TOOL" passwd ${USER}
     done
 
@@ -125,4 +125,31 @@ installNightlight() {
     printf "%b\n" "${YELLOW}Double Click nightlight-linux in the ${PWD} directory in your file manager to open nightlight${RC}"
 }
 
+setupAppLauncher() {
+
+    mkdir -p ~/.local/bin
+    cp $PWD/nightlight-linux ~/.local/bin
+    mkdir -p ~/.local/share/applications
+    sh -c 'echo -e "[Desktop Entry]\nName=NightLight\nExec=$HOME/.local/bin/nightlight-linux\nTerminal=false\nType=Application" > ~/.local/share/applications/nightlight.desktop'
+
+}
+
+userDecision() {
+
+    setupAppLauncher
+
+    printf "\n\n\n\n\n"
+    printf "%b" "Do you want Nightlight to show up in your app launcher? (y/N): "
+    read -r appla
+    if [ "$appla" = "y" ] || [ "$appla" = "Y" ]; then
+        setupAppLauncher
+        printf "%b\n" "${YELLOW}Done!${RC}"
+        printf "%b\n" "${YELLOW}you might need to restart for Nightlight to show up in your App Launcher${RC}"
+        printf "%b\n" "${YELLOW}Enjoy :)${RC}"
+    else
+        return 0
+    fi
+}
+
 installNightlight
+userDecision
