@@ -10,11 +10,11 @@ This script draws heavily on the work of ChrisTitus's [linutil](https://github.c
 After reading what it does,<br>
 Open up your terminal, type
 
-	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/nightlight-linux-install-script/refs/heads/main/Nightlight_Linux_install.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/NLIS/refs/heads/main/main.sh | bash
 
 or try out dev branch (not recommended)
 
-	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/nightlight-linux-install-script/refs/heads/dev/Nightlight_Linux_install.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/NLIS/refs/heads/dev/main.sh | bash
 
 ### Also check out Nightlight's offical website!
 [click here](https://nightlight.gg/)
