@@ -5,15 +5,11 @@ RED='\033[31m'
 YELLOW='\033[33m'
 
 checkArch() {
-    case "$(uname -m)" in
-        x86_64|amd64)
-            arch="x86_64"
-            ;;
-        *)
-            printf "%b\n" "${RED}Sorry, this architecture isn't supported!${RC}"
-            exit 1
-            ;;
-    esac
+    if [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "amd64" ]; then
+        printf "%b\n" "${RED}Sorry, this architecture isn't supported!${RC}"
+        exit 1
+        ;;
+    fi
 }
 
 command_exists() {
