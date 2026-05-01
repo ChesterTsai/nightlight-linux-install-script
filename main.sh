@@ -4,6 +4,18 @@ RC='\033[0m'
 RED='\033[31m'
 YELLOW='\033[33m'
 
+checkArch() {
+    case "$(uname -m)" in
+        x86_64|amd64)
+            arch="x86_64"
+            ;;
+        *)
+            printf "%b\n" "${RED}Sorry, this architecture isn't supported!${RC}"
+            exit 1
+            ;;
+    esac
+}
+
 command_exists() {
     for cmd in "$@"; do
         export PATH="$HOME/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:$PATH"
@@ -149,5 +161,6 @@ userDecision() {
     fi
 }
 
+checkArch
 installNightlight
 userDecision
