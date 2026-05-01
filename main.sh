@@ -138,7 +138,7 @@ userDecision() {
 
     setupAppLauncher
 
-    printf "%b" "Do you want Nightlight to show up in your app launcher? (y/n) [n] "
+    printf "Do you want Nightlight to show up in your app launcher? (y/n) [n] "
     read -r appla
     if [ "$appla" = "y" ] || [ "$appla" = "Y" ]; then
         setupAppLauncher
