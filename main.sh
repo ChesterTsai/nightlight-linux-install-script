@@ -8,7 +8,6 @@ checkArch() {
     if [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "amd64" ]; then
         printf "%b\n" "${RED}Sorry, this architecture isn't supported!${RC}"
         exit 1
-        ;;
     fi
 }
 
