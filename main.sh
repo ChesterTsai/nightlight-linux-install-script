@@ -84,6 +84,8 @@ checkAlpine() {
     new_str=${str:1}
     echo $new_str | "$ESCALATION_TOOL" tee -a /etc/apk/repositories
 
+    "$ESCALATION_TOOL" apk update
+
 }
 
 checkPackageManager() {
