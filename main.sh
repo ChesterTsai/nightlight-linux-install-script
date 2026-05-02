@@ -77,15 +77,11 @@ checkAlpine() {
     fi
 
     str=$(tail -n 1 /etc/apk/repositories)
-    if [[ $str != "#"* ]] && [[ $str == *"/community" ]]; then
-        return 0
+    if [[ $str == "#"* ]] && [[ $str == *"/community" ]]; then
+        new_str=${str:1}
+        echo $new_str | "$ESCALATION_TOOL" tee -a /etc/apk/repositories
+        "$ESCALATION_TOOL" apk update
     fi
-
-    new_str=${str:1}
-    echo $new_str | "$ESCALATION_TOOL" tee -a /etc/apk/repositories
-
-    "$ESCALATION_TOOL" apk update
-
 }
 
 checkPackageManager() {
