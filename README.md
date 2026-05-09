@@ -10,11 +10,11 @@ This script draws heavily on the work of ChrisTitus's [linutil](https://github.c
 After reading what it does,<br>
 Open up your terminal, type
 
-	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/NLIS/main/main.sh | bash
+	curl -fsSL https://github.com/ChesterTsai/NLIS/raw/main/main.sh | bash
 
 or try out dev branch (not recommended)
 
-	curl -fsSL https://raw.githubusercontent.com/ChesterTsai/NLIS/dev/main.sh | bash
+	curl -fsSL https://github.com/ChesterTsai/NLIS/raw/dev/main.sh | bash
 
 ### Also check out Nightlight's offical website!
 [click here](https://nightlight.gg/)
