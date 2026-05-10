@@ -115,7 +115,7 @@ installDependency() {
             "$PACKAGER" install wget2-wget webkit2gtk4.1
             ;;
         apt-get|zypper)
-            "$ESCALATION_TOOL" "$PACKAGER" install wget webkit2gtk-4.1
+            "$ESCALATION_TOOL" "$PACKAGER" install -y wget webkit2gtk-4.1
             ;;
         apk)
             "$ESCALATION_TOOL" "$PACKAGER" add gcompat libc6-compat wget webkit2gtk-4.1
