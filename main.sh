@@ -69,21 +69,6 @@ checkSteamOS() {
 
 }
 
-checkAlpine() {
-
-    . /etc/os-release</dev/tty
-    if [ $ID != "alpine" ]; then
-        return 0
-    fi
-
-    str=$(tail -n 1 /etc/apk/repositories)
-    if [[ $str == "#"* ]] && [[ $str == *"/community" ]]; then
-        new_str=${str:1}
-        echo $new_str | "$ESCALATION_TOOL" tee -a /etc/apk/repositories
-        "$ESCALATION_TOOL" apk update
-    fi
-}
-
 checkPackageManager() {
     ## Check Package Manager
     PACKAGEMANAGER="pacman apt-get dnf zypper rpm-ostree apk"
@@ -117,9 +102,6 @@ installDependency() {
         apt-get|zypper)
             "$ESCALATION_TOOL" "$PACKAGER" install -y wget webkit2gtk-4.1
             ;;
-        apk)
-            "$ESCALATION_TOOL" "$PACKAGER" add gcompat libc6-compat wget webkit2gtk-4.1
-            ;;
         *)
             printf "%b\n" "${RED}Unsupported package manager${RC}"
             ;;
@@ -131,7 +113,6 @@ installNightlight() {
     checkEscalationTool
     checkPassword
     checkSteamOS
-    checkAlpine
     checkPackageManager
     installDependency
 
