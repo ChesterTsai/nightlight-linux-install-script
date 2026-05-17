@@ -68,4 +68,3 @@ etc.
 
 etc.
 </details>
-<details>
